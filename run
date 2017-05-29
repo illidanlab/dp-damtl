@@ -1,0 +1,46 @@
+#!/bin/bash
+# Run TNs and CS on one computer
+# Read parameters from configuration and execute .class followed by these parameters
+# First make sure .class file exists, chmod +x run, bash (name of shell script). 
+# echo "Third Index: ${VALUE[2]}"
+# DEBUG=false if ${DEBUG}; then fi
+
+declare -i n
+n=0
+
+INPUT=configuration
+while IFS= read -r char
+do
+   VALUE[$n]=$char
+   n=$((n+1))
+done < "$INPUT"
+#printf '%s\n' "${VALUE[@]}"
+
+
+#CS compile and execute
+
+javac -d bin -sourcepath src -cp src/AMTL_Matrix_Jar.jar:src/commons-math3-3.6.1.jar:src/ejml.jar:src/jama-1.0.3.jar:src/jblas-1.2.4.jar:src/ujmp.jar src/Server_ProxTrace_one.java
+
+java -cp bin:src/AMTL_Matrix_Jar.jar:src/commons-math3-3.6.1.jar:src/ejml.jar:src/jama-1.0.3.jar:src/jblas-1.2.4.jar:src/ujmp.jar Server_ProxTrace_one &
+
+
+#TNs compile and execute
+
+javac -d bin -sourcepath src -cp src/AMTL_Matrix_Jar.jar:src/commons-math3-3.6.1.jar:src/ejml.jar:src/jama-1.0.3.jar:src/jblas-1.2.4.jar:src/ujmp.jar src/TwoReturn.java
+
+java -cp bin:src/AMTL_Matrix_Jar.jar:src/commons-math3-3.6.1.jar:src/ejml.jar:src/jama-1.0.3.jar:src/jblas-1.2.4.jar:src/ujmp.jar TwoReturn &
+
+javac -d bin -sourcepath src -cp src/AMTL_Matrix_Jar.jar:src/commons-math3-3.6.1.jar:src/ejml.jar:src/jama-1.0.3.jar:src/jblas-1.2.4.jar:src/ujmp.jar src/MultiReturn.java
+
+java -cp bin:src/AMTL_Matrix_Jar.jar:src/commons-math3-3.6.1.jar:src/ejml.jar:src/jama-1.0.3.jar:src/jblas-1.2.4.jar:src/ujmp.jar MultiReturn &
+
+for i in {1..20}
+do
+   javac -d bin -sourcepath src -cp src/AMTL_Matrix_Jar.jar:src/commons-math3-3.6.1.jar:src/ejml.jar:src/jama-1.0.3.jar:src/jblas-1.2.4.jar:src/ujmp.jar src/Client_Log_Loss_one$i.java
+done    
+
+for i in {1..20}
+do
+   java -cp bin:src/AMTL_Matrix_Jar.jar:src/commons-math3-3.6.1.jar:src/ejml.jar:src/jama-1.0.3.jar:src/jblas-1.2.4.jar:src/ujmp.jar Client_Log_Loss_one$i ${VALUE[$(( ($i - 1) * 2 ))]} ${VALUE[$(( ($i - 1) * 2 + 1))]} &
+done
+

@@ -22,5 +22,5 @@ Theoretical guarantees of the proposed algorithm are derived and supported by th
 
 ## Acknowledgement
 This research is supported in part by the Office of Naval Research (ONR) under
-grant number N00014-14-1-0631 and National Science Foundation under Grant
+grant number N00014-17-1-2265, N00014-14-1-0631 and National Science Foundation under Grant
 IIS-1565596, IIS-1615597. 

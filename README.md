@@ -1,13 +1,9 @@
-# dp-damt
-Source code of SIGKDD2017 paper: Privacy-Preserving Distributed Multi-Task Learning with Asynchronous Updates
-
-# Title
-Privacy-Preserving Distributed Multi-Task Learning with Asynchronous Updates
-
-# Author
+# Privacy-Preserving Distributed Multi-Task Learning with Asynchronous Updates
 Liyang Xie, Inci M. Baytas, Kaixiang Lin, Jiayu Zhou
 
-# Abstract
+Accepted by SIGKDD 2017
+
+## Abstract
 Many data mining applications involve a set of related learning tasks. 
 Multi-task learning (MTL) is a learning paradigm that improves generalization
 performance by transferring knowledge among those tasks. MTL 
@@ -24,7 +20,7 @@ The proposed asynchronous approach is robust against network delays and provides
 differential privacy through carefully designed perturbation.
 Theoretical guarantees of the proposed algorithm are derived and supported by the extensive experimental results. 
 
-# Acknowledgement
+## Acknowledgement
 This research is supported in part by the Office of Naval Research (ONR) under
 grant number N00014-14-1-0631 and National Science Foundation under Grant
 IIS-1565596, IIS-1615597. 
